@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for cv in cvs %}
+<h1> le cv de {{ cv.nom_user}}</h1>
+<br>
+ {{ cv.email_user }}
+<br>
+{{ cv.numero_offre.titre }}
+<a href="{{ cv.cv_file.url }}">
+    cv
+</a>
+<br>
+<br>
+
+{% endfor %}
+</body>
+</html>

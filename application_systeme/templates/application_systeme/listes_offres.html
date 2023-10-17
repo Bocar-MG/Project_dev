@@ -1,0 +1,97 @@
+{% extends 'application_systeme/baserecruteur.html' %}
+
+{% block content%}
+
+<div class="row">
+  <div class="col-md-12">
+
+
+    <h3 class="title-5 m-b-35">liste des offres que vous avez enregistré</h3>
+
+
+    <div class="table-responsive table-responsive-data2">
+      <table class="table table-data2">
+          <thead>
+              <tr>
+                  <th>
+                      <label class="au-checkbox">
+                          <input type="checkbox">
+                          <span class="au-checkmark"></span>
+                      </label>
+                  </th>
+                  <th>Titre</th>
+                  <th>formation</th>
+                  <th>description</th>
+                  <th>date limite</th>
+                  <th>status</th>
+                  <th>experience</th>
+                  <th>action</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for offre in offres %}
+              <tr class="tr-shadow">
+                  <td>
+                      <label class="au-checkbox">
+                          <input type="checkbox">
+                          <span class="au-checkmark"></span>
+                      </label>
+                  </td>
+                  <td>{{ offre.titre }}</td>
+                  <td>
+                      <span class="block-email">{{ offre.formation }}</span>
+                  </td>
+                  <td class="desc">{{ offre.competence }}</td>
+                  <td>{{ offre.date_limite }}</td>
+                  <td>
+                      {% if offre.publication %}
+                      <span class="text-success">publiée</span>
+                       {% else %}
+                       <span class="text-danger">Non publiée</span>
+                       {% endif %}
+                  </td>
+                  <td>{{ offre.experience }}</td>
+                  <td>
+                      <div class="table-data-feature">
+
+                        <a href="{% url 'update_offre' offre.id %}">  <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                              <i class="zmdi zmdi-edit"></i>
+                          </button>
+                            </a>
+                        <a href="{% url 'suppression' offre.id %}">  <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <i class="zmdi zmdi-delete"></i>
+                          </button>
+                            </a>
+
+                      </div>
+                  </td>
+              </tr>
+              
+              <tr class="spacer"></tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  {% endblock content %}

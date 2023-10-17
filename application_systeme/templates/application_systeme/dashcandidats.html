@@ -1,0 +1,80 @@
+{% extends 'application_systeme/candidat_template.html' %}
+
+{% block content%}
+
+
+
+
+    <div class="table-responsive table-responsive-data2">
+      <table class="table table-data2">
+          <thead>
+              <tr>
+                  <th>
+                      <label class="au-checkbox">
+                          <input type="checkbox">
+                          <span class="au-checkmark"></span>
+                      </label>
+                  </th>
+                  <th>Titre</th>
+                  <th>Nom de la soceite</th>
+                  <th>Votre Nom</th>
+                  <th>Votre Email</th>
+                  <th>Etat </th>
+                  <th>Votre CV</th>
+
+              </tr>
+          </thead>
+          <tbody>
+            {% for cv in cvs %}
+              <tr class="tr-shadow">
+                  <td>
+                      <label class="au-checkbox">
+                          <input type="checkbox">
+                          <span class="au-checkmark"></span>
+                      </label>
+                  </td>
+                  <td>{{ cv.numero_offre.titre }}</td>
+                  <td>{{cv.numero_offre.recruteur.username}}</td>
+                  <td class="desc">{{ cv.nom_user }}</td>
+                  <td>
+                      <span class="block-email">{{ cv.email_user }}</span>
+                  </td>
+
+
+                  <td>
+                      {% if cv.Etat  %}
+                            <span class="text-success">Félicitations candidatures retenues</span>
+                       {% else %}
+                       <span class="text-danger">Votre Candidatures ne reponds pas aux exigences</span>
+                       {% endif %}
+
+                  </td>
+
+                  <td><a href=" {{ cv.cv_file.url }}">cv</a></td>
+              <!--    <td>
+                      <div class="table-data-feature">
+
+                        <a href="#">  <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                              <i class="zmdi zmdi-edit"></i>
+                          </button>
+                            </a>
+                        <a href="#">  <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <i class="zmdi zmdi-delete"></i>
+                          </button>
+                            </a>
+
+                      </div>
+                  </td> !-->
+              </tr>
+
+              <tr class="spacer"></tr>
+            {% endfor %}
+          </tbody>
+      </table>
+  </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}

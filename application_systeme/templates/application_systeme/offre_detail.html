@@ -1,0 +1,176 @@
+{% extends 'application_systeme/basecandidat.html' %}
+{% load static %}
+{% block content%}
+
+<div class="slider-area gray-bg position-relative">
+    <div class="single-slider d-flex align-items-center slider-height2">
+    <div class="container">
+    <div class="row">
+    <div class="col-xl-12">
+    <div class="hero-caption hero-caption2">
+    <h2>{{ offre.titre }}</h2>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <div class="job_details_area section-bg2">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-8">
+    <div class="job_details_header">
+    <div class="single_jobs white-bg d-flex justify-content-between">
+    <div class="jobs_left d-flex align-items-center">
+    <div class="thumb">
+    <img src="{{ offre.image.url }}" alt="" style="width:100px">
+    </div>
+    <div class="jobs_conetent">
+    <a href="#"><h4>{{ offre.titre }}</h4></a>
+    <div class="links_locat d-flex align-items-center">
+    <div class="location">
+    <p> <i class="fas fa-map-marker-alt"></i> tunis,tunisie</p>
+    </div>
+    <div class="location">
+    <p> <i class="far fa-clock"></i> Part-time</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="jobs_right">
+    <div class="apply_now">
+    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="descript_wrap white-bg">
+    <div class="single_wrap">
+    <h4>Description</h4>
+    <p> {{ offre.description }}</p>
+    <p></p>
+    </div>
+    <div class="single_wrap">
+    <h4>Expérience</h4>
+    <ul>
+    <li>
+        {{ offre.experience }} ans
+    </li>
+
+    </ul>
+    </div>
+    <div class="single_wrap">
+    <h4>Qualifications</h4>
+    <ul>
+    <li> {{ offre.competence }}
+    </li>
+    </ul>
+    </div>
+
+    </div>
+     {% if user.is_authenticated   %}
+        {% if user.is_superuser  %}
+        <h1>.</h1>
+        {% else %}
+
+
+
+
+    <div class="apply_job_form white-bg">
+    <h4>Apply for the job</h4>
+      <!--  <form method="POST" enctype="multipart/form-data" >
+           {% csrf_token %}
+           {{ form.as_p }}
+     <div class="col-md-12">
+    <div class="submit_btn">
+    <button class="boxed-btn3 w-100" type="submit">Postuler</button>
+    </div>
+     </div>
+  </form> !-->
+        <!-- Sidi tu dois adapter ta table CV ici !-->
+  <!-- <form action="#">  !-->
+
+
+  <form method="POST" enctype="multipart/form-data" >
+       {% csrf_token %}
+    <div class="row">
+    <div class="col-md-6">
+    <div class="input_field">
+    <input type="text" placeholder="Your name" name="{{ form.nom_user.name }}"  value="{{ user.username }}">
+    </div>
+    </div>
+    <div class="col-md-6">
+    <div class="input_field">
+    <input type="text" placeholder="Email"  name="{{ form.email_user.name }}" value="{{ user.email }}">
+    </div>
+    </div>
+
+    <div class="col-md-12">
+    <div class="input-group">
+    <div class="input-group-prepend">
+    <button type="button" id="inputGroupFileAddon03">
+    <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+    </button>
+    </div>
+    <div class="custom-file">
+    <input type="file" name="{{form.cv_file.name}}" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
+    <label class="custom-file-label" for="inputGroupFile03">Upload CV</label>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-12">
+    <div class="input_field">
+    <textarea name="{{ form.lettre.name }}" id="" cols="30" rows="10" placeholder="Coverletter"></textarea>
+    </div>
+    </div>
+    <div class="col-md-12">
+    <div class="submit_btn">
+    <button class="boxed-btn3 w-100" type="submit">Postuler</button>
+    </div>
+    </div>
+    </div>
+    </form>
+
+
+    </div>
+          {% endif %}
+        {% else %}
+        <h4 class="text-primary ">Veuillez vous connecter ou vous s'inscrire pour postuler</h4>
+        {% endif %}
+
+<!--    <div class="col-lg-4">
+    <div class="job_sumary">
+    <div class="summery_header">
+    <h3>Resumé</h3>
+    </div>
+    <div class="job_content">
+    <ul>
+    <li>Publier: <span></span></li>
+    
+     <li>Lieu: <span>California, USA</span></li>
+    <li> Nature de Offre: <span> Full-time</span></li>
+    </ul>
+    </div>
+    </div>
+    <div class="share_wrap d-flex">
+    <span>Partager:</span>
+    <ul>
+    <li><a href="#"> <i class="fab fa-facebook-f"></i></a> </li>
+    <li><a href="#"> <i class="fab fa-google-plus-g"></i></a> </li>
+    <li><a href="#"> <i class="fab fa-twitter"></i></a> </li>
+    <li><a href="#"> <i class="fas fa-envelope"></i></a> </li>
+    </ul>
+    </div>
+    
+    </div>
+       !-->
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+{% endblock content %}

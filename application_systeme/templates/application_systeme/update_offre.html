@@ -1,0 +1,67 @@
+{% extends 'application_systeme/baserecruteur.html' %}
+{% load bootstrap5 %}
+{% block content%}
+
+
+
+<div class="card">
+  <div class="card-header">Modification des offres</div>
+  <div class="card-body">
+      <div class="card-title">
+          <h3 class="text-center title-2">Modifier offre</h3>
+      </div>
+      <hr>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+       <!--   <div class="form-group">
+              <label for="cc-payment" class="control-label mb-1 ">Titre</label>
+              {{ form.titre }}
+          </div>
+          <div class="form-group has-success">
+              <label for="cc-name" class="control-label mb-1">Experience</label>
+                  {{ form.experience }}
+          </div>
+          <div class="form-group">
+              <label for="cc-number" class="control-label mb-1">competence</label>
+                   {{ form.competence }}
+
+          </div>
+
+                  <div class="form-group">
+
+                  </div>
+
+                  <div class="form-group">
+                  <label for="x_card_code" class="control-label mb-1">Descriptione</label>
+
+                    <textarea name=" description"  rows="9" placeholder="Content..." class="form-control"></textarea>
+
+                  </div>
+              </div>
+          </div>
+          <div>
+              <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                  Enregistrer
+              </button>
+          </div>
+          !-->
+          {% bootstrap_form update_offre %}
+    <br>
+    <br>
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    {% endbuttons %}
+
+      </form>
+  </div>
+</div>
+
+ <!-- <h1>Ajouter une offre</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+  </form>
+  {% endblock content %}
+
+ -->

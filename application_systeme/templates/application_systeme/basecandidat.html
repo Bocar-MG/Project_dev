@@ -1,0 +1,218 @@
+
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from preview.colorlib.com/theme/jobsco/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 Feb 2023 15:03:22 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Job</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="">
+<link rel="shortcut icon" type="image/x-icon" href=" {% static 'candidat/img/favicon.ico' %}">
+
+<link rel="stylesheet" href="{% static 'candidat/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'candidat/css/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'candidat/css/slicknav.css' %}">
+<link rel="stylesheet" href="{% static 'candidat/css/animate.min.css'%}">
+<link rel="stylesheet" href="{% static 'candidat/css/magnific-popup.css'%}">
+<link rel="stylesheet" href="{% static 'candidat/css/fontawesome-all.min.css'%}">
+<link rel="stylesheet" href="{% static 'candidat/css/themify-icons.css'%}">
+<link rel="stylesheet" href="{% static 'candidat/css/slick.css'%}">
+<link rel="stylesheet" href="{% static 'candidat/css/nice-select.css' %}">
+<link rel="stylesheet" href="{% static 'candidat/css/style.css'%}">
+<script nonce="c9d31aba-55d8-4254-bbcb-182e50222763">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
+ 
+
+
+
+<body>
+<header>
+<div class="header-area header-transparent">
+<div class="main-header header-sticky">
+<div class="container">
+<div class="menu-wrapper d-flex align-items-center justify-content-between">
+<div class="left-content d-flex align-items-center">
+<div class="logo mr-45">
+<a href="{% url 'index' %}"><img src="{% static 'candidat/img/logo/logo.png' %}" alt=""></a>
+</div>
+
+<div class="main-menu d-none d-lg-block">
+<nav>
+<ul id="navigation">
+<li><a href="/">ACCUEIL</a></li>
+<li><a href="{% url 'listes_index' %}">EMPLOI</a></li>
+    {% if user.is_authenticated %}
+      {% if user.is_superuser%}
+    <li><a href="{% url 'stats' %}">Tableau de board</a></li>
+     {% else %}
+<li><a href="{% url 'user_interface' %}">Tableau de board</a></li>
+
+
+    {% endif %}
+    {% endif %}
+
+</ul>
+</nav>
+</div>
+</div>
+
+<div class="buttons">
+<ul>
+<li class="button-header">
+    {% if user.is_authenticated %}
+<a href="{% url 'Deconnexion' %}" class="header-btn mr-10"> <i class="fas fa-phone-alt"></i>Deconnexion</a>
+    {% else %}
+    <a href="{% url 'signin' %}" class="header-btn mr-10"> <i class="fas fa-phone-alt"></i>Connexion</a>
+    <a href="{% url 'signup' %}" class="header-btn mr-10"> <i class="fas fa-phone-alt"></i>Inscription</a>
+    {% endif %}
+</li>
+</ul>
+</div>
+</div>
+
+<div class="col-12">
+<div class="mobile_menu d-block d-lg-none"></div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+  
+   
+{% block content%}
+{% endblock content %}
+  
+  
+
+
+</main>
+<footer>
+<div class="footer-area footer-padding gray-bg">
+<div class="footer-wrapper ">
+<div class="container">
+<div class="row d-flex justify-content-between">
+<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+<div class="single-footer-caption mb-50">
+<div class="single-footer-caption mb-30">
+
+<div class="footer-logo mb-25">
+<a href="index-2.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+</div>
+<div class="footer-tittle">
+<div class="footer-pera">
+<p>The automated process starts as soon as your clothes go into the machine.The outcome is gleaming clothes.</p>
+</div>
+</div>
+<div class="footer-social">
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
+<div class="single-footer-caption mb-50">
+<div class="footer-tittle">
+<h4>liens</h4>
+<ul>
+
+<li><a href="#">Programing</a></li>
+
+</ul>
+</div>
+</div>
+</div>
+<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+<div class="single-footer-caption mb-50">
+ <div class="footer-tittle">
+<h4> Newsletter</h4>
+<p>Inscrivez-vous à la newsletter pour être informé des nouveaux emplois.</p>
+</div>
+
+<div class="footer-form">
+<div id="mc_embed_signup">
+<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
+<input type="email" name="EMAIL" id="newsletter-form-email" placeholder="  Enter your email">
+<div class="form-icon">
+<button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">
+  S'abonner
+</button>
+</div>
+<div class="mt-10 info"></div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-bottom-area">
+<div class="container">
+<div class="footer-border">
+<div class="row d-flex align-items-center">
+<div class="col-xl-12 ">
+<div class="footer-copy-right text-center">
+<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank" rel="nofollow noopener">Colorlib</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+<div id="back-top">
+<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
+
+
+<script src="{% static 'candidat/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'candidat/js/popper.min.js' %}"></script>
+<script src="{% static 'candidat/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'candidat/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'candidat/js/slick.min.js' %}"></script>
+<script src="{% static 'candidat/js/jquery.slicknav.min.js' %}"></script>
+<script src="{% static 'candidat/js/range.js' %}"></script>
+
+<script src="{% static 'candidat/js/wow.min.js' %}"></script>
+<script src="{% static 'candidat/js/jquery.magnific-popup.js' %}"></script>
+<script src="{% static 'candidat/js/jquery.nice-select.min.js' %}"></script>
+
+<script src="{% static 'candidat/js/contact.js' %}"></script>
+<script src="{% static 'candidat/js/jquery.form.js' %}"></script>
+<script src="{% static 'candidat/js/jquery.validate.min.js' %}"></script>
+<script src="{% static 'candidat/js/mail-script.js' %}"></script>
+<script src="{% static 'candidat/js/jquery.ajaxchimp.min.js'%}"></script>
+
+<script src="{% static 'candidat/js/plugins.js'%}"></script>
+<script src="{% static 'candidat/js/main.js'%}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-23581568-13');
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79bfe3855c9211a2","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.2.0","si":100}' crossorigin="anonymous"></script>
+
+>
+
+
+
+
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/jobsco/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 Feb 2023 15:03:39 GMT -->
+</html>
