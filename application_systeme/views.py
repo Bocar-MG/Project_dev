@@ -155,6 +155,7 @@ def offre_detail(request, id):
 
         ####### Traitement Pour NLP ########
 
+        # utiisation de la librairie SpaCy
 
         ####### Traitement Pour NLP ########
 
