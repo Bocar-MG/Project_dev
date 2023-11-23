@@ -1,0 +1,57 @@
+
+ {% extends 'application_systeme/basecandidat.html' %}
+{% load bootstrap5 %}
+ {% block content%}
+ <div class="register-form-area section-padding">
+    <div class="container">
+    <div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-7 col-md-10">
+    <div class="register-form text-center">
+        <div class="register-heading">
+            <span>Inscription</span>
+            <p>Creer votre compte ici</p>
+            </div>
+        <div></div>
+<form method="POST">
+
+<!--
+    {% csrf_token %}
+
+       {{ form.username.label_tag }}
+       {{ form.username }}
+        <br> <br> <br>
+       {{ form.email.label_tag }}
+       {{ form.email }}
+        <br> <br> <br>
+     {{ form.password1.label_tag }}
+       {{ form.password1 }}
+     <br> <br> <br>
+      Verification
+       {{ form.password2 }}
+     <br> <br>
+    <br>
+
+       <p style="margin-left:200px;">{{ form.role }}</p>
+      <br>
+    <br>
+    <br>
+    <button type="submit"  class="btn login-btn">S'inscrire</button>
+!-->
+    {% csrf_token %}
+    {% bootstrap_form form show_help=False %}
+    <br>
+    <br>
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+</form>
+</form>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}

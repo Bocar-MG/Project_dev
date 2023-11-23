@@ -1,0 +1,272 @@
+{% extends 'application_systeme/basecandidat.html' %}
+{% load static %}
+{% block content%}
+
+
+<div class="slider-area position-relative ">
+
+    <div class="single-sliders slider-height  gray-bg d-flex align-items-center">
+    <div class="container">
+    <div class="row align-items-center">
+    <div class="col-xl-6 col-lg-7">
+    <div class="hero-caption">
+    <span>Le moyen le plus simple de trouver un emploi </span>
+    <h1>Trouvez votre prochain emploi de rêve</h1>
+    
+    <div class="slider-btns">
+    <a href="#" class="btn hero-btn">les offres sont ici</a>
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <div class="hero-tittle">
+    <h2>jobs</h2>
+    </div>
+    
+    <div class="hero-img">
+    <img src="{% static 'candidat/img/hero/hero-img.png' %}" alt="">
+    </div>
+    
+    <div class="hero-shape bounce-animate">
+    <img src=" {% static 'candidat/img/hero/hero-shape.png' %}" alt="">
+    </div>
+    
+    <div class="hero-shape2">
+    <img src="{% static 'candidat/img/hero/hero-shape2.png' %}" alt="">
+    </div>
+    </div>
+    
+    
+    <section class="top-jobs fix ">
+    <div class="container">
+    <div class="row justify-content-center">
+    <div class="col-xl-8 col-lg-9 col-md-12">
+    
+    <div class="section-tittle section-tittle3 text-center mb-10">
+    <span>1000+</span>
+    <h2>Parcourir nos meilleurs emplois</h2>
+    <p></p>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="container-fluid p-0">
+    <div class="top-job-slider ">
+     {% for offre in offres %}
+    <div class="single-top-jobs ">
+    <div  class="services-ion">
+        <img src="{{ offre.image.url }}" class="img-thumbnail" style="width:90px">
+    </div>
+    <div class="services-cap">
+    <h5><a href="#">{{ offre.titre }}</a></h5>
+    <p>{{ offre.description }}</p>
+      {% if user.is_authenticated %}
+    <a href="{% url 'offre_detail' offre.id %}" class="product_btn">{{ val }}</a>
+        {% else %}
+        <a href="{% url 'signin' %}" class="product_btn">{{ val }}</a>
+        {% endif %}
+
+    </div>
+    </div>
+        {% endfor %}
+    
+
+    </div>
+    </div>
+    </section>
+    
+    
+    <section class="about-area gray-bg section-padding2">
+    <div class="container">
+    <div class="row align-items-center justify-content-between">
+    <div class="col-xl-6 col-lg-7 col-md-10">
+    <div class="support-location-img">
+    <img src="{% static 'candidat/img/gallery/about.png' %}" alt="">
+    </div>
+    </div>
+    <div class="col-xl-5 col-lg-5 col-md-10">
+    <div class="right-caption">
+    
+    <div class="section-tittle section-tittle3">
+    <h2>Nous établissons des relations durables entre les candidats et les entreprises.</h2>
+    </div>
+    <div class="support-caption">
+    <p class="pera-top"></p>
+    <p class="mb-45"></p>
+    <a href="#" class="btn about-btn">Trouver un Talent</a>
+    </div>
+    </div>
+     </div>
+    </div>
+    
+    <div class="about-tittle">
+    <h2>Talents</h2>
+    </div>
+    </div>
+    </section>
+    
+    
+    <section class="job-category section-padding">
+    <div class="container">
+    
+    <div class="row justify-content-center mb-55">
+    <div class="col-xl-8">
+    <div class="section-tittle section-tittle3 text-center">
+    <h2>Parcourir à partir des catégories </h2>
+    <p></p>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="single-cat">
+    <div class="cat-icon">
+    <img src="assets/img/icon/top-cat1.svg" alt="">
+    </div>
+    <div class="cat-cap">
+    <h5><a href="#">Design & creatives</a></h5>
+    <p>The automated process starts as soon as your clothes go into.</p>
+    <a href="#" class="view_btn">Browse Job</a>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="single-cat">
+    <div class="cat-icon">
+    <img src="assets/img/icon/top-cat2.svg" alt="">
+    </div>
+    <div class="cat-cap">
+    <h5><a href="#">Finance</a></h5>
+    <p>The automated process starts as soon as your clothes go into.</p>
+    <a href="#" class="view_btn">Browse Job</a>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="single-cat">
+    <div class="cat-icon">
+    <img src="assets/img/icon/top-cat3.svg" alt="">
+    </div>
+    <div class="cat-cap">
+    <h5><a href="#">Marketing</a></h5>
+    <p>The automated process starts as soon as your clothes go into.</p>
+    <a href="#" class="view_btn">Browse Job</a>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="single-cat">
+    <div class="cat-icon">
+    <img src="assets/img/icon/top-cat4.svg" alt="">
+    </div>
+    <div class="cat-cap">
+    <h5><a href="#">Health/Medical</a></h5>
+    <p>The automated process starts as soon as your clothes go into.</p>
+    <a href="#" class="view_btn">Browse Job</a>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="single-cat">
+    <div class="cat-icon">
+    <img src="assets/img/icon/top-cat5.svg" alt="">
+    </div>
+    <div class="cat-cap">
+    <h5><a href="#">Corporate</a></h5>
+    <p>The automated process starts as soon as your clothes go into.</p>
+    <a href="#" class="view_btn">Browse Job</a>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="single-cat">
+    <div class="cat-icon">
+    <img src="assets/img/icon/top-cat6.svg" alt="">
+    </div>
+    <div class="cat-cap">
+    <h5><a href="#">Copywriting</a></h5>
+    <p>The automated process starts as soon as your clothes go into.</p>
+    <a href="#" class="view_btn">Browse Job</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    
+    
+    <div class="testimonial-area">
+    <div class="container">
+    <div class="testimonial-wrapper">
+    <div class="row justify-content-center">
+    <div class="col-xl-8 col-lg-10">
+    <div class="h1-testimonial-active dot-style">
+    
+    <div class="single-testimonial position-relative">
+    <div class="testimonial-caption">
+    <img src="assets/img/icon/quotes-sign.png" alt="" class="quotes-sign">
+    <p>"The automated process starts as soon as your clothe go into the machine. This site outcome is gleaming clothe. Placeholder text commonly used. In publishing and graphic.</p>
+    </div>
+    
+    <div class="testimonial-founder d-flex align-items-center">
+    <div class="founder-img">
+    <img src="assets/img/icon/testimonial.png" alt="">
+    </div>
+    <div class="founder-text">
+    <span>Robart Brown</span>
+    <p>Creative designer at Colorlib</p>
+    </div>
+    </div>
+    </div>
+    
+    <div class="single-testimonial position-relative">
+    <div class="testimonial-caption">
+    <img src="assets/img/icon/quotes-sign.png" alt="" class="quotes-sign">
+    <p>"The automated process starts as soon as your clothe go into the machine. This site outcome is gleaming clothe. Placeholder text commonly used. In publishing and graphic.</p>
+    </div>
+    
+    <div class="testimonial-founder d-flex align-items-center">
+    <div class="founder-img">
+    <img src="assets/img/icon/testimonial.png" alt="">
+    </div>
+    <div class="founder-text">
+    <span>Robart Brown</span>
+    <p>Creative designer at Colorlib</p>
+    </div>
+    </div>
+    </div>
+    
+    <div class="single-testimonial position-relative">
+    <div class="testimonial-caption">
+    <img src="assets/img/icon/quotes-sign.png" alt="" class="quotes-sign">
+    <p>"The automated process starts as soon as your clothe go into the machine. This site outcome is gleaming clothe. Placeholder text commonly used. In publishing and graphic.</p>
+    </div>
+    
+    <div class="testimonial-founder d-flex align-items-center">
+    <div class="founder-img">
+    <img src="assets/img/icon/testimonial.png" alt="">
+    </div>
+    <div class="founder-text">
+    <span>Robart Brown</span>
+    <p>Creative designer at Colorlib</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <div class="t-shape">
+    <img src="assets/img/gallery/testimonial-shape.png" alt="">
+    </div>
+    </div>
+    </div>
+    </div>
+    
+
+
+{% endblock content %}
