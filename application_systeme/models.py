@@ -38,3 +38,10 @@ class Postulation(models.Model):
     date_postuler = models.CharField(max_length=50,null=True)
     Etat = models.CharField(max_length=50,default="En cours")
     numero_offre = models.IntegerField(null=True)
+
+class Classement(models.Model):
+    NomCandidat = models.CharField(max_length=50)
+    email_candidat = models.CharField(max_length=50)
+    Titre_offre = models.CharField(max_length=50)
+    Score = models.IntegerField(null=True)
+    cv = models.ForeignKey(Cv,null=True,on_delete=models.CASCADE)

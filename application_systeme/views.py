@@ -1,15 +1,28 @@
 import datetime
+from pathlib import Path
+from tempfile import NamedTemporaryFile
 
+import spacy
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from spacy.matcher import Matcher
 
+from application_systeme.convert_pdf_to_txt import pdf_to_text
 from application_systeme.forms import UserForm, OffreForm, CvForm
-from application_systeme.models import Offre, Postulation, Cv
+from application_systeme.model_cv_training import competence_patterns, formation_patterns, experience_patterns, \
+    certification_patterns, langages_patterns
+from application_systeme.models import Offre, Postulation, Cv, Classement
 
 
 # Create your views here.
+
+competences_matcher = []
+formations_matcher = []
+experiences_matcher = []
+certification_matcher = []
+langages = []
 
 @login_required
 def pagerecruteur(request):
@@ -156,6 +169,77 @@ def offre_detail(request, id):
         ####### Traitement Pour NLP ########
 
         # utiisation de la librairie SpaCy
+        nlp = spacy.load('fr_core_news_sm')
+
+        cv_filepdf = cv.cv_file
+        with cv_filepdf.open() as f:
+            with NamedTemporaryFile(delete=False) as tmp_file:
+                tmp_file.write(f.read())
+                file_path = Path(tmp_file.name)
+
+        texte_brute = pdf_to_text(file_path)
+        # print(texte_brute)
+        print(texte_brute)
+        doc = nlp(texte_brute)
+
+        matcher = Matcher(nlp.vocab)
+        matcher.add("COMPETENCE", competence_patterns)
+        matcher.add("FORMATION", formation_patterns)
+        matcher.add("EXPERIENCE", experience_patterns)
+        matcher.add("CERTIFICATION", certification_patterns)
+        matcher.add("LANGUE", langages_patterns)
+
+        matches = matcher(doc)
+        for match_id, start, end in matches:
+            if nlp.vocab.strings[match_id] == "COMPETENCE":
+                competences_matcher.append(doc[start:end].text)
+            elif nlp.vocab.strings[match_id] == "FORMATION":
+                formations_matcher.append(doc[start:end].text)
+            elif nlp.vocab.strings[match_id] == "EXPERIENCE":
+                experiences_matcher.append(doc[start:end].text)
+            elif nlp.vocab.strings[match_id] == "CERTIFICATION":
+                certification_matcher.append(doc[start:end].text)
+
+        print(experiences_matcher)
+        print(competences_matcher)
+        print(formations_matcher)
+        print(certification_matcher)
+        print("###### Traitement des donneés extraite #######")
+        competence_offre = str(offre.competence).split(',')
+        comp_strip = []
+        formation_offre = str(offre.formation).split(',')
+        form_strip = []
+        for comp in competence_offre:
+            comp_strip.append(comp.strip())
+        for form in formation_offre:
+            form_strip.append(form)
+        # Comptence extraction and compare
+        print(comp_strip)
+        print(form_strip)
+        scoreCompétence = 0
+        scoreFormation = 0
+        for competence in comp_strip:
+            if competence in set(competences_matcher):
+                scoreCompétence = scoreCompétence + 10
+                print(f"compétence trouvé: {competence}")
+        print(f"votre candidature correspond a {scoreCompétence} %")
+
+        for formation in form_strip:
+            if formation in set(formations_matcher):
+                scoreFormation = scoreFormation + 10
+                print(f"compétence trouvé:{competence}")
+        print(f"votre candidature correspond a {scoreFormation} %")
+        total = scoreFormation + scoreCompétence
+        # J'ai diviser le score en deux categorie formation et compétence si vous pouvez l'ameliorer
+        # je modifie en meme le champs etat de la table cv du l'utilisateur
+        if total >= 50:
+            cv.Etat = True
+        cv.save()
+        print(cv.Etat)
+        # Ici je remplie la tbale classement pour que le recruteur puisse voir, vous pouvez aussi l'ameliorer selon vos suggestions
+        table = Classement.objects.create(NomCandidat=request.user.username, email_candidat=request.user.email,
+                                          Titre_offre=offre.titre, Score=total, cv=cv)
+        table.save()
 
         ####### Traitement Pour NLP ########
 
@@ -176,5 +260,5 @@ def postuler(request,id):
 @login_required
 def classementListe(request):
     if request.user.is_authenticated:
-
-        return render(request,'application_systeme/classement.html')
+        tableauClassement = Classement.objects.all()
+        return render(request,'application_systeme/classement.html',{'tableauClassement':tableauClassement})
