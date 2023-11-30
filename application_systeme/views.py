@@ -177,7 +177,7 @@ def offre_detail(request, id):
                 tmp_file.write(f.read())
                 file_path = Path(tmp_file.name)
 
-        texte_brute = pdf_to_text(file_path)
+        texte_brute = pdf_to_text(file_path).lower()
         # print(texte_brute)
         print(texte_brute)
         doc = nlp(texte_brute)

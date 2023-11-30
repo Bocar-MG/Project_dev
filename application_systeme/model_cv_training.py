@@ -4,7 +4,7 @@ from spacy.matcher import Matcher
 
 competence_patterns = [
     [
-    {"LOWER": {"IN": ["python", "java", "c++", "javascript", "html", "css", "sql","github", "symfony", "c","php","django","Asp.net core 6","c#",".net"]}},
+    {"LOWER": {"IN": ["python", "java", "c++", "javascript", "html", "css", "sql","github", "symfony", "c","php","django","asp.net core 6","c#",".net","angular"]}},
     {"LOWER": "machine", "OP": "?"},
     {"LOWER": "learning", "OP": "?"},
     {"LOWER": "deep", "OP": "?"},
