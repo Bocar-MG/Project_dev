@@ -1,4 +1,5 @@
 import datetime
+import os
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
@@ -18,11 +19,7 @@ from application_systeme.models import Offre, Postulation, Cv, Classement
 
 # Create your views here.
 
-competences_matcher = []
-formations_matcher = []
-experiences_matcher = []
-certification_matcher = []
-langages = []
+
 
 @login_required
 def pagerecruteur(request):
@@ -156,6 +153,11 @@ def interface_user(request):
 def offre_detail(request, id):
     user = request.user
     offre = Offre.objects.get(id=id)
+    competences_matcher = []
+    formations_matcher = []
+    experiences_matcher = []
+    certification_matcher = []
+    langages = []
     form = CvForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         cv = form.save(commit=False)
@@ -176,6 +178,8 @@ def offre_detail(request, id):
             with NamedTemporaryFile(delete=False) as tmp_file:
                 tmp_file.write(f.read())
                 file_path = Path(tmp_file.name)
+           # tmp_file.close()
+            #os.remove(tmp_file.name)
 
         texte_brute = pdf_to_text(file_path).lower()
         # print(texte_brute)
@@ -227,7 +231,7 @@ def offre_detail(request, id):
         for formation in form_strip:
             if formation in set(formations_matcher):
                 scoreFormation = scoreFormation + 10
-                print(f"compétence trouvé:{competence}")
+                print(f"Formation trouvé:{competence}")
         print(f"votre candidature correspond a {scoreFormation} %")
         total = scoreFormation + scoreCompétence
         # J'ai diviser le score en deux categorie formation et compétence si vous pouvez l'ameliorer
@@ -240,6 +244,15 @@ def offre_detail(request, id):
         table = Classement.objects.create(NomCandidat=request.user.username, email_candidat=request.user.email,
                                           Titre_offre=offre.titre, Score=total, cv=cv)
         table.save()
+
+        tmp_file.close()
+        os.remove(tmp_file.name)
+
+
+        competences_matcher.clear()
+        formations_matcher.clear()
+        experiences_matcher.clear()
+        certification_matcher.clear()
 
         ####### Traitement Pour NLP ########
 
@@ -262,3 +275,10 @@ def classementListe(request):
     if request.user.is_authenticated:
         tableauClassement = Classement.objects.all()
         return render(request,'application_systeme/classement.html',{'tableauClassement':tableauClassement})
+
+@login_required
+def supprimerCandidat(request,id):
+    if request.user.is_authenticated:
+        candidat = Classement.objects.get(id=id)
+        candidat.delete()
+        return redirect('classement')

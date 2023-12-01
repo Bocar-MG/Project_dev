@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import inscription, connexion, ajouter_offre, lister_offres, pagerecruteur, Deconnexion, UpdateOffre, \
-    SupprimerOffre, index, lister_offres_index, Stats, offre_detail, interface_user, classementListe
+    SupprimerOffre, index, lister_offres_index, Stats, offre_detail, interface_user, classementListe, supprimerCandidat
 
 urlpatterns = [
 
@@ -18,5 +18,6 @@ urlpatterns = [
     path('update/<int:id>', UpdateOffre, name='update_offre'),
     path('classment/', classementListe, name='classement'),
     path('delete/<int:id>', SupprimerOffre, name='suppression'),
+    path('delete/<int:id>', supprimerCandidat, name='supcandidat'),
 
 ]

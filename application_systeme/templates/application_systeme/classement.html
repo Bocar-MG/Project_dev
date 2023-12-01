@@ -51,9 +51,13 @@
                        {% endif %}
                   </td>
 
+                  <td>
+                      <a href="{% url 'supcandidat' candidat.id %}">Supprimer</a>
+              </td>
+
               </tr>
 
-              <tr class="spacer"></tr>
+              <tr class="spacer"> </tr>
               {% endfor %}
           </tbody>
       </table>
